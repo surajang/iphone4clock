@@ -1,0 +1,16 @@
+{
+  "name": "iphone4clock",
+  "version": "1.0.0",
+  "description": "Simple clock web app for iPhone 4 Safari",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "keywords": ["clock", "iphone4", "safari", "webapp"],
+  "author": "",
+  "license": "MIT"
+}
