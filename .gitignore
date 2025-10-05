@@ -157,3 +157,8 @@ Thumbs.db
 
 # Local development files
 *.local
+
+# Server runtime files
+server.log
+server.pid
+nohup.out
