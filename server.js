@@ -7,19 +7,6 @@ const PORT = process.env.PORT || 3000;
 // 정적 파일 서빙 (HTML, CSS, JS)
 app.use(express.static(path.join(__dirname, 'public')));
 
-// 시간 API 엔드포인트
-app.get('/api/time', (req, res) => {
-  const now = new Date();
-  const time = {
-    hours: now.getHours().toString().padStart(2, '0'),
-    minutes: now.getMinutes().toString().padStart(2, '0'),
-    seconds: now.getSeconds().toString().padStart(2, '0'),
-    timestamp: now.getTime()
-  };
-  
-  res.json(time);
-});
-
 // 메인 페이지 라우트
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));

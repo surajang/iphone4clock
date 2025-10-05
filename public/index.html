@@ -107,43 +107,7 @@
                    m + '<span class="time-separator">:</span>' + s;
         }
         
-        // 서버에서 시간 가져오기
-        function fetchTime() {
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET', '/api/time', true);
-            xhr.timeout = 5000; // 5초 타임아웃
-            
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4) {
-                    if (xhr.status === 200) {
-                        try {
-                            var timeData = JSON.parse(xhr.responseText);
-                            updateClock(timeData);
-                        } catch (e) {
-                            console.log('JSON 파싱 에러:', e);
-                            useLocalTime();
-                        }
-                    } else {
-                        console.log('서버 응답 에러:', xhr.status);
-                        useLocalTime();
-                    }
-                }
-            };
-            
-            xhr.onerror = function() {
-                console.log('네트워크 에러');
-                useLocalTime();
-            };
-            
-            xhr.ontimeout = function() {
-                console.log('요청 타임아웃');
-                useLocalTime();
-            };
-            
-            xhr.send();
-        }
-        
-        // 로컬 시간 사용 (폴백)
+        // 로컬 시간 사용
         function useLocalTime() {
             var now = new Date();
             var timeData = {
@@ -164,13 +128,13 @@
         // 주기적 업데이트
         function startClock() {
             // 즉시 한 번 실행
-            fetchTime();
+            useLocalTime();
             
             // 1초마다 업데이트
             setInterval(function() {
                 var now = Date.now();
                 if (now - lastUpdateTime >= updateInterval) {
-                    fetchTime();
+                    useLocalTime();
                 }
             }, updateInterval);
         }
