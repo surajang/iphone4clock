@@ -60,6 +60,23 @@ else
     exit 1
 fi
 
+# public 디렉토리 및 파일 확인/생성
+if [ ! -d "public" ]; then
+    log_info "public 디렉토리 생성 중..."
+    mkdir -p public
+    log_success "public 디렉토리 생성 완료"
+fi
+
+# index.html 파일 확인
+if [ ! -f "public/index.html" ]; then
+    log_error "public/index.html 파일이 없습니다!"
+    log_error "Git에 public 디렉토리가 제대로 추가되지 않았을 수 있습니다."
+    log_error "다음 명령어로 확인하세요: git add public/ && git commit -m 'Add public directory'"
+    exit 1
+fi
+
+log_success "public/index.html 파일 확인 완료"
+
 # 서버 백그라운드 실행
 log_info "서버를 백그라운드에서 시작 중..."
 nohup npm start > server.log 2>&1 &
